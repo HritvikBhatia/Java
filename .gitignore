@@ -1,0 +1,6 @@
+# Ignore all .class files
+*.class
+
+# Ignore bin or build directories if they exist
+/bin/
+/build/
