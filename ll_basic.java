@@ -20,6 +20,7 @@ public class ll_basic {
 
     public void addFirst(int data){
         Node newNode = new Node(data);
+
         size++;
         
         if(head == null){
@@ -93,6 +94,26 @@ public class ll_basic {
         temp.next = newNode;
     }
 
+    // # delete/remove first 
+    //  1 head = head.next 
+
+    public int removeFirst(){
+        if(size == 0){
+            System.out.println("Linked list is empty");
+            return Integer.MIN_VALUE;
+        }else if(size == 1){
+            int data = head.data;
+            head = tail = null;
+            size = 0;
+            return data;
+        }
+        int data = head.data;
+        head = head.next;
+        size--;
+        return data;
+    }
+    
+    
     public static void main(String[] args) {
         ll_basic ll = new ll_basic();
         
