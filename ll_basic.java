@@ -112,19 +112,133 @@ public class ll_basic {
         size--;
         return data;
     }
+
+    // # delete/remove last 
+    //  1 we have to go till last 2nd node then i<size-1
+    //  2 prev.next = null
+    //  3 tail = prev
+
+    public int removeLast(){
+        if(size == 0){
+            System.out.println("Linked list is empty");
+            return Integer.MIN_VALUE;
+        }else if(size == 1){
+            int data = head.data;
+            head = tail = null;
+            size = 0;
+            return data;
+        }
+        int data = tail.data;
+        Node prev = head;
+        while(prev.next != tail){
+            prev = prev.next;
+        }
+        prev.next = null;
+        tail = prev;
+        size--;
+        return data;
+    }
+
+    //# iterative search
+    // 1 temp = head
+    // 2 while temp!=null
+    // 3 if key == temp.data return index 
+    // 4 else temp = temp.next 
     
-    
+    public int LinearSearch(int key)
+    {
+        Node temp = head;
+        int i = 0;
+        while(temp != null){
+            if(temp.data == key){
+                return i;
+            }
+            temp = temp.next;
+            i++;
+        }
+        System.out.println("Key not found");
+        return -1;
+    }
+ 
+    /* reverse a Linked List 
+     * consist of 3 variable and 4 step
+     * curr = head , prev = next = null
+     *  1 next = curr.next
+     *  2 curr.next = prev
+     *  3 prev = curr
+     *  4 curr = next
+     * tail = head
+     * head = prev 
+    */
+
+    public void reverseLL(){
+        Node curr = tail = head;
+        Node prev = null;
+        Node next;
+
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+    } 
+
+    public void deleteNthFromEnd(int index){
+        int sz = 0; //first we check total size
+        Node temp = head;
+        while(temp != null){
+            temp = temp.next;
+            sz++;
+        }
+
+        if(index == sz){// we have to remove head
+            head = head.next; // remove First
+            return;
+        }
+
+        //sz-index
+        int i = 1;
+        int prevOfIndex = sz - index;
+        Node prev = head;
+        if(i < prevOfIndex){
+            prev = prev.next;
+            i++;
+        }
+        prev.next = prev.next.next;
+        return;
+    }
+
+
     public static void main(String[] args) {
         ll_basic ll = new ll_basic();
         
         ll.addFirst(2); 
         ll.addFirst(1);
+
         ll.addLast(4);
         ll.addLast(5);
+        
         ll.addMid(2, 3);
         
-        ll.printLL();
-        System.out.println(ll.size);
-
+        ll.removeFirst(); //1
+        ll.removeLast(); //5
+        
+        System.out.print("LL: ");
+        ll.printLL(); // 2 3 4
+        
+        System.out.println("size of LL is: "+ll.size); // 3
+        
+        System.out.println("index of key is: "+ ll.LinearSearch(4));
+        
+        ll.reverseLL();
+        System.out.print("Reverse LL: ");
+        ll.printLL(); //4 3 2
+        
+        ll.deleteNthFromEnd(2);
+        System.out.print("LL: ");
+        ll.printLL(); // 4 2 
+        
     }
 }
