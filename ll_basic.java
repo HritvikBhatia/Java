@@ -13,11 +13,11 @@ public class ll_basic {
     public static Node tail;
     public int size;
 
-    // # steps to insert/add first 
-    //  1 create a new Node 
-    //  2 new Node next = head
-    //  3 head = new Node
-
+    /*# steps to insert/add first 
+     1 create a new Node 
+     2 new Node next = head
+     3 head = new Node
+    */
     public void addFirst(int data){
         Node newNode = new Node(data);
 
@@ -32,10 +32,11 @@ public class ll_basic {
         head = newNode;
     }
 
-    // # insert/add last
-    //  1 create a new node
-    //  2 tail.next = new Node
-    //  3 tail = new Node
+    /* insert/add last
+     1 create a new node
+     2 tail.next = new Node
+     3 tail = new Node
+    */
 
     public void addLast(int data){
         Node newNode = new Node(data);
@@ -50,10 +51,11 @@ public class ll_basic {
         tail = newNode;
     }
 
-    // # print a LinkedList
-    //  1 create temp node = head
-    //  2 print temp.data 
-    //  3 temp = temp.next till temp!=null
+    /*# print a LinkedList
+     1 create temp node = head
+     2 print temp.data 
+     3 temp = temp.next till temp!=null
+    */
 
     public void printLL(){
         if(head == null){
@@ -68,13 +70,14 @@ public class ll_basic {
         System.out.println();
     }
 
-    // # insert/add in the middle
-    //  1 we need the index and the data
-    //  2 create temp = head
-    //  3 i=0 till i< index-1 i++
-    //  4 temp = temp.next
-    //  5 newNode.next = temp.next
-    // `6 temp.next = newNode
+    /* insert/add in the middle
+     1 we need the index and the data
+     2 create temp = head
+     3 i=0 till i< index-1 i++
+     4 temp = temp.next
+     5 newNode.next = temp.next
+     6 temp.next = newNode
+    */
 
     public void addMid(int index,int data){
         if(index == 0){
@@ -94,8 +97,9 @@ public class ll_basic {
         temp.next = newNode;
     }
 
-    // # delete/remove first 
-    //  1 head = head.next 
+    /*# delete/remove first 
+     1 head = head.next 
+    */
 
     public int removeFirst(){
         if(size == 0){
@@ -113,10 +117,11 @@ public class ll_basic {
         return data;
     }
 
-    // # delete/remove last 
-    //  1 we have to go till last 2nd node then i<size-1
-    //  2 prev.next = null
-    //  3 tail = prev
+    /*# delete/remove last 
+     1 we have to go till last 2nd node then i<size-1
+     2 prev.next = null
+     3 tail = prev
+    */
 
     public int removeLast(){
         if(size == 0){
@@ -139,12 +144,13 @@ public class ll_basic {
         return data;
     }
 
-    //# iterative search
-    // 1 temp = head
-    // 2 while temp!=null
-    // 3 if key == temp.data return index 
-    // 4 else temp = temp.next 
-    
+    /*# iterative search
+      1 temp = head
+      2 while temp!=null
+      3 if key == temp.data return index 
+      4 else temp = temp.next 
+    */
+
     public int LinearSearch(int key)
     {
         Node temp = head;
