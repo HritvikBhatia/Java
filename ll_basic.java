@@ -210,6 +210,105 @@ public class ll_basic {
         return;
     }
 
+    public Node findMid(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    /* check for palindrome
+     * 1 find mid
+     * 2 reverse the second half
+     * 3 check if LHS = RHS 
+    */
+
+    public boolean checkPalindrome(){
+        if(head == null || head.next == null){
+            return true;
+        }
+        // step 1
+        Node midNode = findMid(head);
+
+        //step 2
+        Node currNode = midNode;
+        Node prev = null;
+        Node next;
+
+        while(currNode != null){
+            next = currNode.next;
+            currNode.next = prev;
+            prev = currNode;
+            currNode = next;
+        }
+        Node RHShead = prev;
+        Node LHShead = head;
+
+        //step 3
+        while (RHShead != null) {
+            if(RHShead.data != LHShead.data){
+                return false;
+            }
+            RHShead = RHShead.next;
+            LHShead = LHShead.next;
+        }
+        return true;
+
+    }
+
+    public boolean isCycle(){
+        Node slow = head;
+        Node fast = head;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                return true;
+            }
+        }
+        return false;
+    }
+  
+    /* remove cycle
+     * 1 check iscycle
+     * 2 find meeting point
+     * 3 remove cycle -> last.next = null
+    */
+
+    public static void removeCycle(){
+        //1
+        Node slow = head;
+        Node fast = head;
+        Boolean cycle = false;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                cycle = true;
+                break;
+            }
+        }
+        if(cycle == false){
+            return;
+        }
+
+        //2 
+        slow = head;
+        Node prev = null;
+        while (slow != fast) {
+            prev = fast;
+            slow = slow.next;
+            fast = fast.next;
+        }
+        //3 
+        prev.next = null;
+    }
 
     public static void main(String[] args) {
         ll_basic ll = new ll_basic();
@@ -240,5 +339,6 @@ public class ll_basic {
         System.out.print("LL: ");
         ll.printLL(); // 4 2 
         
+        System.out.println("Palindrome: "+ ll.checkPalindrome());
     }
 }
