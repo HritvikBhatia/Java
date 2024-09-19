@@ -316,6 +316,49 @@ public class ll_basic {
         prev.next = null;
     }
 
+    /* Zig zag ll 
+     * 1 -> 2 -> 3 -> 4 -> 5  =>  1 -> 5 -> 2 -> 4 -> 3
+     * find and reverse mid
+     * altermate merge
+     */
+
+    public void zigzag(){
+        // step 1
+        Node midNode = findMid(head);
+
+        //step 2
+        Node currNode = midNode;
+        Node prev = null;
+        Node next;
+
+        while(currNode != null){
+            next = currNode.next;
+            currNode.next = prev;
+            prev = currNode;
+            currNode = next;
+        }
+        Node RHShead = prev;
+        Node LHShead = head;
+        
+        // 3 
+        Node nextL, nextR;
+        while(LHShead!= null && RHShead != null){
+            nextL = LHShead.next;
+            LHShead.next = RHShead;
+            
+            nextR = RHShead.next;
+            RHShead.next = nextL;
+
+            // update
+            LHShead = nextL;
+            RHShead = nextR;
+
+        }
+        if (LHShead != null) {
+            LHShead.next = null;
+        }
+    }
+
     public static void main(String[] args) {
         ll_basic ll = new ll_basic();
         
@@ -346,5 +389,17 @@ public class ll_basic {
         ll.printLL(); // 4 2 
         
         System.out.println("Palindrome: "+ ll.checkPalindrome());
+        
+        /* // for checking the zigzag function uncomment this and comment the above   
+            ll.addLast(1);
+            ll.addLast(2);
+            ll.addLast(3);
+            ll.addLast(4);
+            ll.addLast(5);
+            ll.addLast(6);
+
+            ll.zigzag();
+            ll.printLL();
+        */
     }
 }
