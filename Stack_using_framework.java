@@ -77,6 +77,29 @@ public class Stack_using_framework {
         }
     }
 
+    public static boolean isDuplicate(String str){
+        Stack<Character> s = new Stack<>();
+        for(int i=0; i<str.length(); i++ ){
+            char ch = str.charAt(i);
+            if(ch == ')'){
+                int count = 0;
+                while(s.peek() != '('){
+                    s.pop();
+                    count++; 
+                }
+                if(count < 1){
+                    return true; 
+                }else{
+                    s.pop(); //opening pair
+
+                }
+            }else{
+                s.push(ch);
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         Stack<Integer> s = new Stack<>();
         s.push(1);   
@@ -94,7 +117,13 @@ public class Stack_using_framework {
         // System.out.println(reverseString(str));
 
         // //parentheses validation
-        // String str = "({})[]";
-        // System.out.println(isValid(str)); 
+        // String str1 = "({})[]";
+        // System.out.println(isValid(str1)); 
+        
+        // duplicate parentheses
+        String str2 = "((a+b))"; //true
+        String str3 = "(a-b)";//false
+        System.out.println(isDuplicate(str2));
+        System.out.println(isDuplicate(str3));
     }
 }
