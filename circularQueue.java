@@ -1,26 +1,35 @@
-public class Queue_using_array {
+public class circularQueue {
 
     static class Queue{
         static int arr[];
         static int size;
         static int rear;
+        static int front;
 
         Queue(int n){
             arr = new int[n];
             size = n;
             rear = -1;
+            front = -1;
         }
 
         public static boolean isEmpty(){
-            return rear == -1;
+            return rear == -1 && front == -1;
+        }
+
+        public static boolean isFull(){
+            return (rear+1)%size == front;
         }
 
         public static void add(int data){
-            if(rear == size -1){
+            if(isFull()){
                 System.out.println("Queue is full");
                 return;
             }
-            rear = rear + 1;
+            if(front == -1){
+                front = 0; 
+            }
+            rear = (rear + 1) % size;
             arr[rear] = data;
         } 
 
@@ -29,12 +38,14 @@ public class Queue_using_array {
                 System.out.println("Queue if empty");
                 return -1;
             }
-            int front = arr[0];
-            for(int i=0; i<rear; i++){
-                arr[i] = arr[i+1];
+            int result = arr[front];
+            
+            if(rear  == front ){
+                rear = front = -1;
+            }else{
+                front = (front + 1)%size; 
             }
-            rear = rear-1;
-            return front;
+            return result;
         }
 
         public static int peek(){
@@ -42,8 +53,8 @@ public class Queue_using_array {
                 System.out.println("Queue if empty");
                 return -1;
             }
-            int front = arr[0];
-            return front;
+            
+            return arr[front];
         }
     }
 
