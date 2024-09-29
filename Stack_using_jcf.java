@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class Stack_using_framework {
+public class Stack_using_jcf {
 
     public static void pushatBottom(Stack<Integer> s,int data){
         if(s.isEmpty()){
